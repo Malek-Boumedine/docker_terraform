@@ -15,3 +15,6 @@ commandes.txt
 terraform_notes.txt
 terraform.tfstate
 terraform.tfstate.backup
+
+APPLI_FAST_API/2.appli_fast_api/best_cat_boost.pkl
+TERRAFORM/.terraform/providers/registry.terraform.io/hashicorp/azurerm/4.1.0/linux_amd64/terraform-provider-azurerm_v4.1.0_x5
