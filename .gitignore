@@ -1,0 +1,17 @@
+# **terraform.tfvars
+*.tfvars
+**.env
+
+**.venv/
+**.DStore
+**/migrations
+
+**.venv/
+**db.sqlite3
+**__pycache__/
+
+create_users.sh
+commandes.txt
+terraform_notes.txt
+terraform.tfstate
+terraform.tfstate.backup

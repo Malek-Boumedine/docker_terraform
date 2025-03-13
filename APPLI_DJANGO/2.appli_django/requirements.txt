@@ -1,0 +1,10 @@
+django
+django-widget-tweaks
+python-dotenv
+requests
+psycopg2-binary==2.9.9
+gunicorn==21.2.0
+whitenoise==6.6.0
+django-mssql-backend==2.8.1
+mssql-django
+pyodbc==4.0.39
