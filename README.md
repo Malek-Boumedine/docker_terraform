@@ -1,4 +1,4 @@
-# Projet d'Applications Web Django et FastAPI sur Azure
+# Projet d'Applications Web Django et FastAPI sur Docker et Azure - deploiement via Terraform
 
 Ce projet comprend deux applications web distinctes déployées sur Azure, chacune avec sa propre base de données MSSQL. L'ensemble du déploiement est automatisé à l'aide de Terraform.
 
@@ -54,7 +54,6 @@ L'application Django est une plateforme de gestion de prêts bancaires.
 La configuration de la base de données MSSQL pour Django est gérée par les scripts suivants :
 
 - `deploy_sql_server_django.sh` : Déploie le serveur SQL
-- `deploy_django_database.sh` : Crée et configure la base de données
 - `delete_django_database.sh` : Supprime la base de données
 
 ### Application
@@ -82,7 +81,6 @@ L'application FastAPI fournit une API pour le traitement des demandes de prêt a
 La configuration de la base de données MSSQL pour FastAPI est gérée par les scripts suivants :
 
 - `deploy_sql_server_api.sh` : Déploie le serveur SQL
-- `deploy_fastapi_database.sh` : Crée et configure la base de données
 - `delete_fastapi_database.sh` : Supprime la base de données
 
 ### Application
@@ -159,40 +157,48 @@ Les applications utilisent des variables d'environnement pour leur configuration
 
 ### Étapes de déploiement
 
-1. **Configuration des variables Terraform** :
+1. Cloner le repo
+    ```bash
+    git@github.com:Malek-Boumedine/docker_terraform.git
+    ```
+
+2. Extraire le fichier .pkl de model de prédiction : 
+    ```bash
+    tar -xvf APPLI_FAST_API/2.appli_fast_api/best_cat_boost.tar.xz
+    ```
+
+3. **Configuration des variables Terraform** :\
     Créez un fichier `terraform.tfvars` dans le répertoire `TERRAFORM` avec les valeurs appropriées pour toutes les variables définies dans `variables.tf`.
 
-2. **Initialisation de Terraform** :
+4. **Initialisation de Terraform** :
     ```bash
     cd TERRAFORM
     terraform init
     ```
 
-3. **Planification du déploiement** :
+5. **Planification du déploiement** :
     ```bash
     terraform plan
     ```
 
-4. **Déploiement de l'infrastructure** :
+6. **Déploiement de l'infrastructure** :
     ```bash
     terraform apply
     ```
 
-5. **Déploiement des bases de données** :
+7. **Déploiement des bases de données** :
     - Pour Django :
     ```bash
     cd ../APPLI_DJANGO/1.BDD_Postgres_SQLSERVER
-    ./deploy_sql_server_django.sh
     ./deploy_django_database.sh
     ```
     - Pour FastAPI :
     ```bash
     cd ../../APPLI_FAST_API/1.BDD_MariaDB_SQLSERVER
     ./deploy_sql_server_api.sh
-    ./deploy_fastapi_database.sh
     ```
 
-6. **Déploiement des applications** :
+8. **Déploiement des applications** :
     - Pour Django :
     ```bash
     cd ../../APPLI_DJANGO/2.appli_django
@@ -215,7 +221,6 @@ cd APPLI_DJANGO/2.appli_django
 docker build -t django-app .
 docker run -p 8080:8080 django-app
 ```
-
 ## Application FastAPI
 
 Pour exécuter l'application FastAPI en local, utilisez les commandes suivantes :
@@ -226,18 +231,11 @@ docker build -t fastapi-app .
 docker run -p 8000:8000 fastapi-app
 ``` 
 
-
-
-
-
-
-
-
 ## Variables d'environnement
 
 Pour que les applications FastAPI et Django fonctionnent correctement, il est nécessaire de définir certaines variables d'environnement. Ces variables peuvent être stockées dans un fichier .env et un fichier terraform.tfvars que vous créerez à la racine de votre projet. Voici les variables à définir :
 
-1. Fichiers .env
+## 1. Fichiers .env
 
 #### Pour la base de données Django :
 
@@ -271,7 +269,7 @@ Pour que les applications FastAPI et Django fonctionnent correctement, il est n�
 - PORT : Port utilisé pour la connexion à la base de données.
 - DATABASE_URL : URL de connexion à la base de données, formatée pour MSSQL.
 
-2. Fichier terraform.tfvars
+## 2. Fichier terraform.tfvars
 
 #### Pour Django :
 
@@ -336,7 +334,6 @@ Pour que les applications FastAPI et Django fonctionnent correctement, il est n�
 Pour supprimer toutes les ressources déployées, exécutez :
 
 ```bash
-Copy Code
 cd TERRAFORM
 terraform destroy
 ``` 
@@ -366,5 +363,26 @@ Les contributions sont les bienvenues ! Pour contribuer :
 - Poussez vers la branche
 - Ouvrez une Pull Request
 
+## Licence
+MIT License
+
+Copyright (c) 2025 malek boumedine
+
+L'autorisation est accordée, gracieusement, à toute personne obtenant une copie
+de ce logiciel et des fichiers de documentation associés (le "Logiciel"), de traiter
+le Logiciel sans restriction, notamment sans limitation les droits
+d'utiliser, de copier, de modifier, de fusionner, de publier, de distribuer, de sous-licencier,
+et/ou de vendre des copies du Logiciel, ainsi que d'autoriser les personnes auxquelles le
+Logiciel est fourni à le faire, sous réserve des conditions suivantes :
+
+La notice de copyright ci-dessus et cette notice d'autorisation doivent être incluses dans
+toutes les copies ou parties substantielles du Logiciel.
+
+LE LOGICIEL EST FOURNI "TEL QUEL", SANS GARANTIE D'AUCUNE SORTE, EXPLICITE OU IMPLICITE,
+NOTAMMENT SANS GARANTIE DE QUALITÉ MARCHANDE, D'ADÉQUATION À UN USAGE PARTICULIER ET
+D'ABSENCE DE CONTREFAÇON. EN AUCUN CAS, LES AUTEURS OU TITULAIRES DU DROIT D'AUTEUR NE
+SERONT RESPONSABLES DE TOUT DOMMAGE, RÉCLAMATION OU AUTRE RESPONSABILITÉ, QUE CE SOIT DANS
+LE CADRE D'UN CONTRAT, D'UN DÉLIT OU AUTRE, EN PROVENANCE DE, CONSÉCUTIF À OU EN RELATION
+AVEC LE LOGICIEL OU SON UTILISATION, OU AVEC D'AUTRES ÉLÉMENTS DU LOGICIEL.
 
 
