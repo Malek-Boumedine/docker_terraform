@@ -6,19 +6,24 @@ Ce projet comprend deux applications web distinctes déployées sur Azure, chacu
 # Dépendances principales
 
 ![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115.8+-00a393.svg)
-![SQLModel](https://img.shields.io/badge/SQLModel-0.0.22+-red.svg)
-![Alembic](https://img.shields.io/badge/Alembic-1.14.1+-yellow.svg)
-![CatBoost](https://img.shields.io/badge/CatBoost-1.2.7+-green.svg)
-![Pandas](https://img.shields.io/badge/Pandas-2.2.3+-150458.svg)
-![NumPy](https://img.shields.io/badge/NumPy-1.26.4+-013243.svg)
-![JWT](https://img.shields.io/badge/JWT-Python--Jose-blue.svg)
-![Passlib](https://img.shields.io/badge/Passlib-1.7.4+-lightgrey.svg)
-![Psycopg2](https://img.shields.io/badge/Psycopg2-2.9.9+-orange.svg)
-![Django](https://img.shields.io/badge/Django-latest-blue.svg)
-![Gunicorn](https://img.shields.io/badge/Gunicorn-21.2.0+-green.svg)
-![Whitenoise](https://img.shields.io/badge/Whitenoise-6.6.0+-lightgrey.svg)
-![Django MSSQL Backend](https://img.shields.io/badge/Django%20MSSQL%20Backend-2.8.1+-orange.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115.8+-blue.svg)
+![Django](https://img.shields.io/badge/Django-4.2+-blue.svg)  <!-- Ajuste la version si nécessaire -->
+![SQLModel](https://img.shields.io/badge/SQLModel-0.0.22+-blue.svg)
+![Pydantic](https://img.shields.io/badge/Pydantic-2.10.6+-blue.svg)
+![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-2.0.38+-blue.svg)
+![CatBoost](https://img.shields.io/badge/CatBoost-1.2.7+-blue.svg)
+![Pandas](https://img.shields.io/badge/Pandas-2.2.3+-blue.svg)
+![NumPy](https://img.shields.io/badge/NumPy-1.26.4+-blue.svg)
+![Alembic](https://img.shields.io/badge/Alembic-1.14.1+-blue.svg)
+![JWT](https://img.shields.io/badge/JWT-3.4.0+-blue.svg)
+![Passlib](https://img.shields.io/badge/Passlib-1.7.4+-blue.svg)
+![Psycopg2](https://img.shields.io/badge/Psycopg2-2.9.9+-blue.svg)
+![Gunicorn](https://img.shields.io/badge/Gunicorn-21.2.0+-blue.svg)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-0.34.0+-blue.svg)
+![Whitenoise](https://img.shields.io/badge/Whitenoise-6.6.0+-blue.svg)
+![Django MSSQL Backend](https://img.shields.io/badge/Django_MSSQL_Backend-2.8.1+-blue.svg)
+![Python-Multipart](https://img.shields.io/badge/Python_Multipart-0.0.20+-blue.svg)
+![PyODBC](https://img.shields.io/badge/PyODBC-4.0.39+-blue.svg)
 
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Status](https://img.shields.io/badge/Status-Development-red.svg)
@@ -27,8 +32,8 @@ Ce projet comprend deux applications web distinctes déployées sur Azure, chacu
 
 Vous pouvez accéder aux applications déployées via les liens suivants :
 
-* FastAPI : http://malekfastapidjango.francecentral.azurecontainer.io:8000
-* Django : http://malekfastapidjango.francecentral.azurecontainer.io:8080
+* FastAPI : http://malekfastapidjango.francecentral.azurecontainer.io:8080
+* Django : http://malekfastapidjango.francecentral.azurecontainer.io:8000
 
 Informations d'Identification Administrateur
 
