@@ -164,10 +164,10 @@ Les applications utilisent des variables d'environnement pour leur configuration
 
 1. Cloner le repo
     ```bash
-    git@github.com:Malek-Boumedine/docker_terraform.git
+    git clone git@github.com:Malek-Boumedine/docker_terraform.git
     ```
 
-2. Extraire le fichier .pkl de model de prédiction : 
+2. Extraire le fichier .pkl du model de prédiction : 
     ```bash
     tar -xvf APPLI_FAST_API/2.appli_fast_api/best_cat_boost.tar.xz
     ```
@@ -238,12 +238,14 @@ docker run -p 8000:8000 fastapi-app
 
 ## Variables d'environnement
 
-Pour que les applications FastAPI et Django fonctionnent correctement, il est nécessaire de définir certaines variables d'environnement. Ces variables peuvent être stockées dans un fichier .env et un fichier terraform.tfvars que vous créerez à la racine de votre projet. Voici les variables à définir :
+Pour que les applications FastAPI et Django fonctionnent correctement, il est nécessaire de définir certaines variables d'environnement. Ces variables peuvent être stockées dans un fichier .env et un fichier terraform.tfvars que vous créerez dans des répertoires différents. Voici les variables à définir :
 
 ## 1. Fichiers .env
 
 #### Pour la base de données Django :
-
+```bash 
+repertoire APPLI_DJANGO/1.BDD_Postgres_SQLSERVER/.env
+``` 
 - POSTGRES_DB : Nom de la base de données pour l'application Django.
 - POSTGRES_USER : Nom d'utilisateur pour accéder à la base de données.
 - POSTGRES_PASSWORD : Mot de passe associé à l'utilisateur de la base de données.
@@ -251,19 +253,37 @@ Pour que les applications FastAPI et Django fonctionnent correctement, il est n�
 - DATABASE_URL : URL de connexion à la base de données, formatée pour PostgreSQL.
 
 #### Pour l'application Django :
-
+```bash 
+repertoire APPLI_DJANGO/2.appli_django//.env
+``` 
 - DJANGO_SECRET_KEY : Clé secrète utilisée par Django pour la sécurité.
 - DEBUG : Indique si l'application est en mode débogage (True/False).
 - BANK_NAME : Nom de la banque.
 - BANK_STATE : État de la banque.
 - EMAIL : Adresse e-mail de l'administrateur.
 - PASSWORD : Mot de passe de l'administrateur.
-- ACCESS_TOKEN : Jeton d'accès pour l'authentification.
+- ACCESS_TOKEN : Jeton d'accès pour l'authentification. (laisser vide car sera définie automatiquement par l'application)
 - API_ADDRESS : URL de l'API FastAPI.
+- POSTGRES_DB : Nom de la base de données pour l'application Django.
+- POSTGRES_USER : Nom d'utilisateur pour accéder à la base de données.
+- POSTGRES_PASSWORD : Mot de passe associé à l'utilisateur de la base de données.
+- POSTGRES_PORT : Port utilisé pour la connexion à la base de données.
 - POSTGRES_HOST : Hôte de la base de données PostgreSQL.
 
-#### Pour l'application FastAPI :
+#### Pour la base de données FastAPI :
+```bash 
+repertoire APPLI_FAST_API/1.BDD_MariaDB_SQLSERVER/.env
+``` 
+- ADMIN_USER : Nom d'utilisateur administrateur pour la base de données FastAPI
+- ADMIN_PASSWORD : Mot de passe associé à l'utilisateur administrateur
+- DATABASE_NAME : Nom de la base de données utilisée par l'application FastAPI
+- API_USER : Nom d'utilisateur pour l'accès API
+- API_PASSWORD : Mot de passe associé à l'utilisateur API
 
+#### Pour l'application FastAPI :
+```bash 
+repertoire APPLI_FAST_API/2.appli_fast_api/.env
+``` 
 - SECRET_KEY : Clé secrète utilisée pour signer les jetons d'accès.
 - ALGORITHM : Algorithme utilisé pour le chiffrement des jetons.
 - ACCESS_TOKEN_EXPIRE_MINUTES : Durée d'expiration des jetons d'accès en minutes.
