@@ -160,7 +160,7 @@ Les applications utilisent des variables d'environnement pour leur configuration
 - Docker installé (pour les tests locaux)
 - Accès à un Azure Container Registry
 
-### Étapes de déploiement
+### Étapes de déploiement via Terraform
 
 1. Cloner le repo
     ```bash
@@ -191,19 +191,28 @@ Les applications utilisent des variables d'environnement pour leur configuration
     terraform apply
     ```
 
-7. **Déploiement des bases de données** :
+7. **lancer le script de création des utilisateurs des applications sur la base de données**
+    ```bash
+    bash create_users.sh
+    ```
+
+### Étapes de déploiement manuel via les scripts
+
+1. **Déploiement des bases de données** :
     - Pour Django :
     ```bash
     cd ../APPLI_DJANGO/1.BDD_Postgres_SQLSERVER
-    ./deploy_django_database.sh
+    ./deploy_sql_server_django.sh
+    bash create_django_user.sh
     ```
     - Pour FastAPI :
     ```bash
     cd ../../APPLI_FAST_API/1.BDD_MariaDB_SQLSERVER
     ./deploy_sql_server_api.sh
+    bash create_api_user.sh
     ```
 
-8. **Déploiement des applications** :
+2.  **Déploiement des applications** :
     - Pour Django :
     ```bash
     cd ../../APPLI_DJANGO/2.appli_django
@@ -249,12 +258,12 @@ repertoire APPLI_DJANGO/1.BDD_Postgres_SQLSERVER/.env
 - POSTGRES_DB : Nom de la base de données pour l'application Django.
 - POSTGRES_USER : Nom d'utilisateur pour accéder à la base de données.
 - POSTGRES_PASSWORD : Mot de passe associé à l'utilisateur de la base de données.
-- POSTGRES_PORT : Port utilisé pour la connexion à la base de données.
+- POSTGRES_PORT : 1433.
 - DATABASE_URL : URL de connexion à la base de données, formatée pour PostgreSQL.
 
 #### Pour l'application Django :
 ```bash 
-repertoire APPLI_DJANGO/2.appli_django//.env
+repertoire APPLI_DJANGO/2.appli_django/.env
 ``` 
 - DJANGO_SECRET_KEY : Clé secrète utilisée par Django pour la sécurité.
 - DEBUG : Indique si l'application est en mode débogage (True/False).
@@ -267,7 +276,7 @@ repertoire APPLI_DJANGO/2.appli_django//.env
 - POSTGRES_DB : Nom de la base de données pour l'application Django.
 - POSTGRES_USER : Nom d'utilisateur pour accéder à la base de données.
 - POSTGRES_PASSWORD : Mot de passe associé à l'utilisateur de la base de données.
-- POSTGRES_PORT : Port utilisé pour la connexion à la base de données.
+- POSTGRES_PORT : 1433.
 - POSTGRES_HOST : Hôte de la base de données PostgreSQL.
 
 #### Pour la base de données FastAPI :
@@ -291,11 +300,13 @@ repertoire APPLI_FAST_API/2.appli_fast_api/.env
 - DATABASE_PASSWORD : Mot de passe associé à l'utilisateur de la base de données FastAPI.
 - DATABASE_NAME : Nom de la base de données pour l'application FastAPI.
 - HOST_NAME : Hôte de la base de données.
-- PORT : Port utilisé pour la connexion à la base de données.
+- PORT : 1433.
 - DATABASE_URL : URL de connexion à la base de données, formatée pour MSSQL.
 
 ## 2. Fichier terraform.tfvars
-
+```
+Renommez le fichier terraform.tfvars.txt en terraform.tfvars, puis complétez-le en renseignant les valeurs pour chacune des variables.
+```
 #### Pour Django :
 
 - DJANGO_SECRET_KEY : Clé secrète utilisée par Django pour la sécurité.
@@ -309,7 +320,8 @@ repertoire APPLI_FAST_API/2.appli_fast_api/.env
 - POSTGRES_DB : Nom de la base de données pour l'application Django.
 - POSTGRES_USER : Nom d'utilisateur pour accéder à la base de données.
 - POSTGRES_PASSWORD : Mot de passe associé à l'utilisateur de la base de données.
-- POSTGRES_HOST : Hôte de la base de données PostgreSQL.
+- POSTGRES_HOST : adresse du serveur de base de données sql server.
+- POSTGRES_PORT=1433
 
 #### Pour FastAPI :
 
@@ -320,13 +332,14 @@ repertoire APPLI_FAST_API/2.appli_fast_api/.env
 - DATABASE_PASSWORD : Mot de passe associé à l'utilisateur de la base de données FastAPI.
 - DATABASE_NAME : Nom de la base de données pour l'application FastAPI.
 - HOST_NAME : Hôte de la base de données.
-- PORT : Port utilisé pour la connexion à la base de données.
+- PORT : 1433
 - DATABASE_URL : URL de connexion à la base de données, formatée pour MSSQL.
 
 #### Pour Azure :
 
 - azure_subscription_id : ID de l'abonnement Azure.
 - azure_tenant_id : ID du locataire Azure.
+  - pour obtenir les credentials : az acr credential show --name <registry_name>
 - resource_group_name : Nom du groupe de ressources Azure.
 - AZURE_SERVER : Nom du serveur Azure Container Registry.
 - AZURE_USERNAME : Nom d'utilisateur pour se connecter à l'ACR.
@@ -335,6 +348,10 @@ repertoire APPLI_FAST_API/2.appli_fast_api/.env
 - AZURE_SQL_SERVER_NAME : Nom du serveur SQL Azure.
 - AZURE_SQL_ADMIN_LOGIN : Nom d'utilisateur administrateur pour le serveur SQL.
 - AZURE_SQL_ADMIN_PASSWORD : Mot de passe administrateur pour le serveur SQL.
+- AZURE_TERRAFORM_NAME : Nom du groupe de conteneurs Azure à déployer.
+- DNS_NAME : Étiquette DNS pour le groupe de conteneurs.
+- FAST_API_ACR_IMAGE : URL complète de l'image FastAPI dans l'Azure Container Registry.
+- DJANGO_ACR_IMAGE : URL complète de l'image Django dans l'Azure Container Registry.
 
 # Remarques
 

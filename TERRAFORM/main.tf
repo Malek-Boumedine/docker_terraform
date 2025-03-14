@@ -109,11 +109,11 @@ resource "azurerm_mssql_database" "django-db" {
 
 resource "azurerm_container_group" "FastAPI_django" {
     resource_group_name = var.resource_group_name
-    name = "malek-terraform-deploy"
+    name = var.AZURE_TERRAFORM_NAME
     location = "France Central"
     ip_address_type = "Public"
     os_type = "Linux"
-    dns_name_label = "malekfastapidjango"
+    dns_name_label = var.DNS_NAME
 
     image_registry_credential {
         server   = var.AZURE_SERVER
@@ -122,8 +122,8 @@ resource "azurerm_container_group" "FastAPI_django" {
     }
 
     container {
-        name = "fast-api-malek-terraform"
-        image = "mboumedineregistry.azurecr.io/fastapi-app:latest"
+        name = "fast-api-terraform"
+        image = var.FAST_API_ACR_IMAGE
         cpu = 1
         memory = 2
         ports {
@@ -134,8 +134,8 @@ resource "azurerm_container_group" "FastAPI_django" {
     }
 
     container {
-        name = "django-malek-terraform"
-        image = "mboumedineregistry.azurecr.io/django-app:latest"
+        name = "django-terraform"
+        image = var.DJANGO_ACR_IMAGE
         cpu = 1
         memory = 2
         ports {

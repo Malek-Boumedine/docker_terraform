@@ -13,6 +13,10 @@ variable "AZURE_SQL_SERVER_NAME" { type = string }
 variable "AZURE_SQL_ADMIN_LOGIN" { type = string }
 variable "AZURE_SQL_ADMIN_PASSWORD" { type = string }
 
+variable "AZURE_TERRAFORM_NAME" { type = string }
+variable "DNS_NAME" { type = string }
+variable "FAST_API_ACR_IMAGE" { type = string }
+variable "DJANGO_ACR_IMAGE" { type = string }
 
 # Django env vars
 
